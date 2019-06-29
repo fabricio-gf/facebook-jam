@@ -23,15 +23,31 @@ public class UnitLimitManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    public void UpdateLimit(int change)
-    {
-        if(CurrentUnits + change > Limit){
-            //too many units
-        }
-        else{
-            CurrentUnits += change;
+    
+    public void AddUnit(){
+        if(IsLessThanLimit()){
+            CurrentUnits ++;
             UnitLimitText.text = CurrentUnits.ToString();
         }
+        else{
+            //full
+        }
+    }
+
+    public void RemoveUnit(){
+        if(CurrentUnits > 0){
+            CurrentUnits --;
+            UnitLimitText.text = CurrentUnits.ToString();
+        }
+        else{
+            //empty
+        }
+    }
+
+    public bool IsLessThanLimit(){
+        if(CurrentUnits < Limit){
+            return true;
+        }
+        else return false;
     }
 }

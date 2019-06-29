@@ -22,4 +22,5 @@ public class UnitListManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    
 }

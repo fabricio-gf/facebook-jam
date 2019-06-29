@@ -20,6 +20,7 @@ public class PlaceUnit : MonoBehaviour
             else{
                 // delete object
                 //create icon
+                UnitLimitManager.instance.RemoveUnit();
             }
         }
         else if(isMap){
@@ -27,8 +28,11 @@ public class PlaceUnit : MonoBehaviour
                 //set position
             }
             else{
-                //delete icon
-                //create object
+                if(UnitLimitManager.instance.IsLessThanLimit()){
+                    //delete icon
+                    //create object
+                    UnitLimitManager.instance.AddUnit();
+                }
             }
         }
     }
