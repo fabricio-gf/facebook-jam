@@ -6,6 +6,8 @@ public class GUIManager : MonoBehaviour
 {
 
     public static GUIManager instance = null;
+
+    Animator animator = null;
     
     void Awake(){
         if(instance == null)
@@ -17,17 +19,14 @@ public class GUIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        animator = GetComponent<Animator>();
     }
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    public void HidePanel(){
+        animator.SetTrigger("HidePanel");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void ShowPanel(){
+        animator.SetTrigger("ShowPanel");
     }
 }
