@@ -9,7 +9,7 @@ public class Pause : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    void TogglePause(){
+    public void TogglePause(){
         isPaused = !isPaused;
         if(isPaused){
             Time.timeScale = 0;
