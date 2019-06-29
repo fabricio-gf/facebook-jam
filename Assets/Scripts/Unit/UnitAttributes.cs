@@ -10,4 +10,5 @@ public class UnitAttributes : ScriptableObject
     public int cost;
     public int hp;
     public int attackSpeed;
+    public string description;
 }
