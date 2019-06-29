@@ -6,6 +6,9 @@ public class SelectedUnit : MonoBehaviour
 {
     public static SelectedUnit instance = null;
 
+    public GameObject selectedObject = null;
+    public Unit unit = null;
+
     private void Awake()
     {
         if (instance == null)
@@ -17,5 +20,17 @@ public class SelectedUnit : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SelectUnit(GameObject obj){
+        selectedObject = obj;
+        unit = obj.GetComponent<Unit>();
+        StoreManager.instance.ToggleSellButtonShow(true);
+    }
+
+    public void DeselectUnit(){
+        selectedObject = null;
+        unit = null;
+        StoreManager.instance.ToggleSellButtonShow(false);
     }
 }

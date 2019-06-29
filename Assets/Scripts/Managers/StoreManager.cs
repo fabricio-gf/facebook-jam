@@ -8,6 +8,8 @@ public class StoreManager : MonoBehaviour
 
     public int UnitsInStore = 3;
 
+    public GameObject SellButton = null;
+
     void Awake(){
         if (instance == null)
         {
@@ -40,23 +42,29 @@ public class StoreManager : MonoBehaviour
         for(int i = 0; i < transform.childCount; i++){
             Transform t = transform.GetChild(i);
             obj = Instantiate(UnitListManager.instance.iconsList[Random.Range(0, UnitListManager.instance.iconsList.Length)], t);
-            obj.GetComponent<UnitIcon>().storeIndex = i;
-            obj.GetComponent<AddBehaviourToIconButton>().AddBehaviour();
+            obj.GetComponent<UnitIndexes>().storeIndex = i;
+            obj.GetComponent<AddBehaviourToIconButton>().AddBuyBehaviour();
         }
     }
     public void BuyUnit(int index){
         Transform IconTransform = transform.GetChild(index).GetChild(0); 
-        UnitIcon icon = IconTransform.GetComponent<UnitIcon>(); 
-        BenchManager.instance.AddUnitToBench(icon.unitIndex);
+        UnitIndexes icon = IconTransform.GetComponent<UnitIndexes>(); 
+        BenchManager.instance.AddUnitToBench(IconTransform);
 
         MoneyManager.instance.UpdateMoney(-UnitListManager.instance.attributesList[icon.unitIndex].cost);
-        
-        Destroy(transform.GetChild(index).GetChild(0).gameObject);
+    
     }
 
-    public void SellUnit(int index){
-        //BenchManager.instance.RemoveUnitFromBench(index);
+    public void SellUnit(){
+        GameObject obj = SelectedUnit.instance.selectedObject;
+        UnitIndexes unit = obj.GetComponent<UnitIndexes>();
+        BenchManager.instance.RemoveUnitFromBench(unit.benchIndex);
 
-        MoneyManager.instance.UpdateMoney(UnitListManager.instance.attributesList[index].cost);
+        MoneyManager.instance.UpdateMoney(UnitListManager.instance.attributesList[unit.unitIndex].cost);
+        SelectedUnit.instance.DeselectUnit();
+    }
+
+    public void ToggleSellButtonShow(bool show){
+        SellButton.SetActive(show);
     }
 }

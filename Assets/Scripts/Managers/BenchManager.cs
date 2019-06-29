@@ -29,7 +29,7 @@ public class BenchManager : MonoBehaviour
         benchCount = 0;
     }
 
-    public void AddUnitToBench(int index){
+    public void AddUnitToBench(Transform icon){
         if(benchCount == transform.childCount){
             //bench full
 
@@ -39,7 +39,10 @@ public class BenchManager : MonoBehaviour
             for(int i = 0; i < transform.childCount; i++){
                 Transform t = transform.GetChild(i);
                 if(t.childCount == 0){
-                    GameObject obj = Instantiate(UnitListManager.instance.iconsList[index], t);
+                    icon.SetParent(t);
+                    icon.position = t.position;
+                    icon.GetComponent<AddBehaviourToIconButton>().AddSelectBehaviour();
+                    icon.GetComponent<UnitIndexes>().benchIndex = i;
                     benchCount++;
                     return;
                 }
@@ -49,7 +52,7 @@ public class BenchManager : MonoBehaviour
     }
 
     public void RemoveUnitFromBench(int index){
-        Destroy(transform.GetChild(index)?.GetChild(0));
+        Destroy(transform.GetChild(index)?.GetChild(0).gameObject);
         benchCount --;
     }
 }
