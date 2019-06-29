@@ -13,6 +13,7 @@ public class CountDown : MonoBehaviour
 
     public GameObject countdown = null;
     Text countdownText;
+    Animator countdownAnimator = null;
 
     public string[] countdownStrings = null;
     Queue<string> countdownQueue = new Queue<string>();
@@ -29,6 +30,10 @@ public class CountDown : MonoBehaviour
         }
 
         countdownText = countdown.GetComponent<Text>();
+        countdownAnimator = countdown.GetComponent<Animator>();
+
+        //test
+        StartRoundCountdown();
     }
     public void StartRoundCountdown(){
         countdownQueue.Clear();
@@ -39,7 +44,11 @@ public class CountDown : MonoBehaviour
     }
 
     public IEnumerator Step(){
+        countdownText.text = countdownQueue.Dequeue();
+        currentStep++;
+        countdownAnimator.SetTrigger("Swipe");
         while(currentTime < stepDuration){
+            print(currentTime);
             currentTime += Time.deltaTime;
             yield return null;
         }
@@ -48,8 +57,6 @@ public class CountDown : MonoBehaviour
             countdown.SetActive(false);
         }
         else{
-            countdownText.text = countdownQueue.Dequeue();
-            currentStep++;
             StartCoroutine(Step());
         }
     }
