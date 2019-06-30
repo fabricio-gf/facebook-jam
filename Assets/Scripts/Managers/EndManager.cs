@@ -21,8 +21,8 @@ public class EndManager : MonoBehaviour
     }
 
     public void TriggerDefeat(){
-        Time.timeScale = 0;
         DefeatWindow.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void TriggerVictory(){

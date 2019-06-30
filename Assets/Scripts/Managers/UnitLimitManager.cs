@@ -69,9 +69,9 @@ public class UnitLimitManager : MonoBehaviour
     }
 
     public void PlayerUnitDeath(){
-        print("player death");
         numberOfPlayerUnits--;
         if(numberOfPlayerUnits <= 0){
+            print("defeat");
             EndManager.instance.TriggerDefeat();
         }
     }

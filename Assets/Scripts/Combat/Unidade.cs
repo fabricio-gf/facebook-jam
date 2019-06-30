@@ -51,7 +51,10 @@ public class Unidade : MonoBehaviour{
         Life -= Mathf.Abs(damage);
         if (Life <= 0) {
             if(tag == "Player") UnitLimitManager.instance.PlayerUnitDeath();
-            if(tag == "Enemy") UnitLimitManager.instance.EnemyUnitDeath();
+            if(tag == "Enemy") {
+                MoneyManager.instance.UpdateMoney(2);
+                UnitLimitManager.instance.EnemyUnitDeath();
+            }
 
             Destroy(gameObject);
         }

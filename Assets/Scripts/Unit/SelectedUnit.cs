@@ -23,6 +23,10 @@ public class SelectedUnit : MonoBehaviour
     }
 
     public void SelectUnit(GameObject obj){
+        if(selectedObject == obj) {
+            DeselectUnit();
+            return;
+        }
         selectedObject = obj;
         unit = obj.GetComponent<Unit>();
         StoreManager.instance.ToggleSellButtonShow(true);

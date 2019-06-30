@@ -8,6 +8,8 @@ public class GUIManager : MonoBehaviour
     public static GUIManager instance = null;
 
     public Animator animator = null;
+
+    public GameObject ItemsWindow = null;
     
     void Awake(){
         if(instance == null)
@@ -28,5 +30,9 @@ public class GUIManager : MonoBehaviour
 
     public void ShowPanel(){
         animator.SetTrigger("ShowPanel");
+    }
+
+    public void ToggleItems(){
+        ItemsWindow.SetActive(!ItemsWindow.activeSelf);
     }
 }
