@@ -68,9 +68,17 @@ public class StoreManager : MonoBehaviour
     public void SellUnit(){
         GameObject obj = SelectedUnit.instance.selectedObject;
         UnitIndexes unit = obj.GetComponent<UnitIndexes>();
-        BenchManager.instance.RemoveUnitFromBench(unit.benchIndex);
-
-        MoneyManager.instance.UpdateMoney(UnitListManager.instance.attributesList[unit.unitIndex].cost);
+        int moneyAdd;
+        if(obj.GetComponent<Unit>().inBench){
+            BenchManager.instance.RemoveUnitFromBench(unit.benchIndex);
+            moneyAdd = UnitListManager.instance.attributesList[unit.unitIndex].cost;
+        }
+        else{
+            UnitLimitManager.instance.RemoveUnit();
+            moneyAdd = obj.GetComponent<Unit>().attributes.cost;
+            Destroy(obj);
+        }
+        MoneyManager.instance.UpdateMoney(moneyAdd);
         SelectedUnit.instance.DeselectUnit();
     }
 

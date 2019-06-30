@@ -22,6 +22,9 @@ public class Ataque : StateMachineBehaviour{
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         animator.speed = 1;
         //Aplicar dano
-        myUnidade.Target.ApplyDamage(myUnidade.Damage);
+        if (myUnidade.Target != null) {
+            myUnidade.Target.ApplyDamage(myUnidade.Damage);
+        }
+        animator.SetBool("Atacando" , false);
     }
 }

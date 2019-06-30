@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour {
     GridLayoutGroup grid;
-    [SerializeField] int rows;
-    [SerializeField] int columns;
+    [SerializeField] int rows = 8;
+    [SerializeField] int columns = 5;
 
     // Start is called before the first frame update
     void Start() {
@@ -14,7 +14,7 @@ public class GridManager : MonoBehaviour {
         columns = grid.constraintCount;
         rows = Mathf.FloorToInt(transform.childCount / columns);
         for (int i = 0; i < transform.childCount; i++) {
-            Debug.Log(transform.GetChild(i).name + " pos " + Vet2Grid(i));
+            //Debug.Log(transform.GetChild(i).name + " pos " + Vet2Grid(i));
         }
     }
 
@@ -50,29 +50,76 @@ public class GridManager : MonoBehaviour {
         return Mathf.Abs(destination.x - origin.x) + Mathf.Abs(destination.y - origin.y);
     }
 
+    public int ManhattanDistance(Transform originTransform, Transform destinationTransform) {
+        //Debug.Log(originTransform.name+ Vet2Grid(originTransform.GetSiblingIndex()) + " x " + Vet2Grid(destinationTransform.GetSiblingIndex()) );
+        return ManhattanDistance(Vet2Grid(originTransform.GetSiblingIndex()), Vet2Grid(destinationTransform.GetSiblingIndex()));
+    }
+
     public Vector2Int[] AStar(Vector2Int origin, Vector2Int destination) {
         Debug.Log("to be implemented");
         return null;
     }
 
     Transform GetTileByPosition(Vector2Int pos) {
+        //Debug.Log("grid : " + pos + " sibling: " + Grid2Vet(pos));
         return transform.GetChild(Grid2Vet(pos));
     }
 
-    public Transform NextTile(Transform originTile, Transform destinationTile) {
-        Vector3 dir = destinationTile.position - originTile.position;
-        if (Mathf.Abs(dir.y) >  Mathf.Abs(dir.x)) {
-            dir.x = 0f;
-        } else {
-            dir.y = 0f;
-        }
-        dir.Normalize();
-        Vector2Int dirInt = new Vector2Int((int)dir.x, (int)dir.y);
-        //Debug.Log("Proxima tile ta pra dir:" + dirInt);
-
+    public Transform NextTile(Transform originTile, Transform destinationTile) { 
         Vector2Int posGrid = Vet2Grid(originTile.GetSiblingIndex());
-        //Debug.Log("tile atual: "+ originTile.name+" na pos " + posGrid + " nova tile: " + GetTileByPosition(posGrid + dirInt).name + " na pos " + posGrid + dirInt);
-        return GetTileByPosition(posGrid + dirInt);
-    }
 
+        Transform tile;
+
+        Vector3 dirx = destinationTile.position - originTile.position;
+        dirx.y = 0;
+        dirx.Normalize();
+
+        Vector3 diry = destinationTile.position - originTile.position;
+        diry.x = 0;
+        diry.Normalize();
+
+        Vector2Int dirInt;
+
+        if (Mathf.Abs(diry.y) > Mathf.Abs(dirx.x)) {
+            dirInt = new Vector2Int(0, (int)diry.y);
+            tile = GetTileByPosition(posGrid + dirInt);
+            if (tile.childCount == 0) {
+                return tile;
+            }
+            dirInt = new Vector2Int((int)dirx.x, 0);
+            tile = GetTileByPosition(posGrid + dirInt);
+            if (tile.childCount == 0) {
+                return tile;
+            }
+        } else {
+            dirInt = new Vector2Int((int)dirx.x, 0);
+            tile = GetTileByPosition(posGrid + dirInt);
+            if (tile.childCount == 0) {
+                return tile;
+            }
+            dirInt = new Vector2Int(0, (int)diry.y);
+            tile = GetTileByPosition(posGrid + dirInt);
+            if (tile.childCount == 0) {
+                return tile;
+            }
+        }   
+       
+       
+        /*
+        dirInt = new Vector2Int(0, (int)(-diry.y));
+        tile = GetTileByPosition(posGrid + dirInt);
+        if (tile.childCount == 0) {
+            return tile;
+        }
+
+        dirx.Normalize();
+        dirInt = new Vector2Int((int)(-dirx.x), 0);
+        tile = GetTileByPosition(posGrid + dirInt);
+        if (tile.childCount == 0) {
+            return tile;
+        }
+        */
+        return null;
+    }
+    
 }

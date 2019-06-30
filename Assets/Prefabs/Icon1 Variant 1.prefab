@@ -123,6 +123,27 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2130272436533028492, guid: d951635ddf566ea47a009b3319532d0f,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130272436533028492, guid: d951635ddf566ea47a009b3319532d0f,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130272436533028492, guid: d951635ddf566ea47a009b3319532d0f,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2130272436533028492, guid: d951635ddf566ea47a009b3319532d0f,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1523523337861121371, guid: bf00cff7b394e2e498116795b1107d6a,
+        type: 3}
     - target: {fileID: 677742353997486085, guid: d951635ddf566ea47a009b3319532d0f,
         type: 3}
       propertyPath: index
@@ -132,6 +153,11 @@ PrefabInstance:
         type: 3}
       propertyPath: unitIndex
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5641933263529379957, guid: d951635ddf566ea47a009b3319532d0f,
+        type: 3}
+      propertyPath: m_Text
+      value: Jeff
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d951635ddf566ea47a009b3319532d0f, type: 3}

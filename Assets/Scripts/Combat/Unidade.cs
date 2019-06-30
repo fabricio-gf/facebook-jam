@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class Unidade : MonoBehaviour{
@@ -9,23 +10,37 @@ public class Unidade : MonoBehaviour{
 
     public float Damage = 1;
     public float AtaqueDelay = 1;
-    public float Range = 1.1f;
+    public int Range = 1;
 
     public float MovementSpeed = 2;
 
     public Unidade Target;
+    public GridManager grid;
 
     // Start is called before the first frame update
     void Start()
     {
         Life = MaxLife;
-        
+        grid = FindObjectOfType<GridManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public int DistanceToTarget() {
+        if (Target != null) {
+            Debug.Log(name + " distancia:" + grid.ManhattanDistance(transform, Target.transform) + " de " + Target.name);
+            return grid.ManhattanDistance(transform.parent, Target.transform.parent);
+        } else {
+            return int.MaxValue;
+        }
+    }
+
+    public bool TargetInRange() {
+        return (DistanceToTarget() <= Range);
     }
 
     public void ApplyDamage(float damage) {

@@ -48,7 +48,7 @@ public class CountDown : MonoBehaviour
         currentStep++;
         countdownAnimator.SetTrigger("Swipe");
         while(currentTime < stepDuration){
-            print(currentTime);
+            //print(currentTime);
             currentTime += Time.deltaTime;
             yield return null;
         }
