@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour{
         if (isMoving) {
             if (Vector2.Distance(transform.position, transform.parent.position) > 0.1f) {
                 transform.position = Vector2.MoveTowards(transform.position, transform.parent.position, Unidade.MovementSpeed * Time.deltaTime);
-                //Debug.Log("Andando para " + transform.parent.name);
+                Debug.Log("Andando para " + transform.parent.name);
             } else {
                 transform.localPosition = Vector3.zero;
                 isMoving = false;

@@ -21,8 +21,9 @@ public class Andando : StateMachineBehaviour
         
         if (myUnidade.Target != null) {
             //MovementScript;
+            //Debug.Log(myUnidade.name + " andando para " + myUnidade.Target);
             MovementScript.MoveTowards(myUnidade.Target.transform);
-            animator.SetFloat("TargetDistance", Vector3.Distance(myUnidade.Target.transform.position,animator.transform.position));
+            animator.SetBool("TargetInRange", myUnidade.TargetInRange());
         } else {
             //achar outro target
             FindNewTarget(animator.transform);
