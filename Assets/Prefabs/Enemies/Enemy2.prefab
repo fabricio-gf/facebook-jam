@@ -184,11 +184,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78310f96265ed0248ac620c20e1aafb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxLife: 5
-  Life: 10
-  Damage: 5
+  MaxLife: 8
+  Life: 8
+  Damage: 4
   AtaqueDelay: 1
-  Range: 4
+  Range: 5
   MovementSpeed: 2
   Target: {fileID: 0}
   grid: {fileID: 0}
@@ -214,7 +214,7 @@ Animator:
   m_GameObject: {fileID: 3238671642877043807}
   m_Enabled: 0
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 55572ae77094201499055aedd2dba85f, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5f81785ff0d2acb47829a638e2565fb0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
