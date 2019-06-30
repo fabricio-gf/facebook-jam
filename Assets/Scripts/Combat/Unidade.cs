@@ -17,9 +17,12 @@ public class Unidade : MonoBehaviour{
     public Unidade Target;
     public GridManager grid;
 
+    Animator _Animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        _Animator = GetComponent<Animator>();
         Life = MaxLife;
         grid = FindObjectOfType<GridManager>();
     }
@@ -49,5 +52,17 @@ public class Unidade : MonoBehaviour{
         if (Life <= 0) {
             Destroy(gameObject);
         }
+    }
+
+    public void ApplyHeal(float amount) {
+        Life += Mathf.Abs(amount);
+    }
+
+    public void StartFight() {
+        _Animator.enabled = true;
+    }
+
+    public void StopFight() {
+        _Animator.enabled = false;
     }
 }
