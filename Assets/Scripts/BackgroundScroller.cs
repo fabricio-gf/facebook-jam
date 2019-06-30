@@ -21,7 +21,6 @@ public class BackgroundScroller : MonoBehaviour
     void Update()
     {
         float newPos = Mathf.Repeat(Time.time * scrollSpeed, limit);
-        print(newPos);
         transform.position = startPosition + Vector2.up * newPos;
     }
 }
