@@ -53,6 +53,10 @@ public class BenchManager : MonoBehaviour
                     if(t.childCount == 0){
                         icon.SetParent(t);
                         icon.position = t.position;
+
+                        RectTransform _mRect = icon.GetComponent<RectTransform>();
+                        _mRect.sizeDelta = new Vector2(94, 124);
+
                         icon.GetComponent<AddBehaviourToIconButton>().AddSelectBehaviour();
                         icon.GetComponent<UnitIndexes>().benchIndex = i;
                         icon.GetComponent<Unit>().inBench = true;

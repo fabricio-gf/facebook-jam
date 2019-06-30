@@ -37,6 +37,7 @@ public class WaveSpawner : MonoBehaviour
             freeTiles.RemoveAt(randomIndex);
         }
         UnitLimitManager.instance.SetNumberOfEnemies(numberOfEnemies);
+        StoreManager.instance.ShowNewUnitsInStore();
     }
 
     public void StartWave(){

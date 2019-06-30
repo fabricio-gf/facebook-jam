@@ -103,7 +103,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   benchIndex: 0
   storeIndex: 0
-  unitIndex: 0
+  unitIndex: 2
 --- !u!114 &1509799386289578976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99d49982541a0024b8579ec14089a5be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attributes: {fileID: 11400000, guid: 3cc77623e4bad7b4d9d9ba624a1dfb63, type: 2}
+  attributes: {fileID: 11400000, guid: 931b968f3cd4d5f41a9c81b9fcf50d93, type: 2}
   inBench: 0
 --- !u!1 &3928708358810743872
 GameObject:

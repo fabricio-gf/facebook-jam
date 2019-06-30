@@ -57,11 +57,14 @@ public class StoreManager : MonoBehaviour
         }
     }
     public void BuyUnit(int index){
-        Transform IconTransform = transform.GetChild(index).GetChild(0); 
-        UnitIndexes icon = IconTransform.GetComponent<UnitIndexes>(); 
-        BenchManager.instance.AddUnitToBench(IconTransform);
+        Transform IconTransform = transform.GetChild(index).GetChild(0);
+        UnitIndexes icon = IconTransform.GetComponent<UnitIndexes>();
+        
+        if(MoneyManager.instance.CurrentMoney >= UnitListManager.instance.attributesList[icon.unitIndex].cost){
+            BenchManager.instance.AddUnitToBench(IconTransform);
 
-        MoneyManager.instance.UpdateMoney(-UnitListManager.instance.attributesList[icon.unitIndex].cost);
+            MoneyManager.instance.UpdateMoney(-UnitListManager.instance.attributesList[icon.unitIndex].cost);
+        }
     
     }
 
