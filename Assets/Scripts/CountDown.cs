@@ -54,6 +54,7 @@ public class CountDown : MonoBehaviour
         }
         currentTime = 0;
         if(currentStep == totalSteps){
+            WaveSpawner.instance.StartWave();
             countdown.SetActive(false);
         }
         else{

@@ -74,7 +74,7 @@ public class StoreManager : MonoBehaviour
             moneyAdd = UnitListManager.instance.attributesList[unit.unitIndex].cost;
         }
         else{
-            UnitLimitManager.instance.RemoveUnit();
+            UnitLimitManager.instance.RemoveUnit(obj, obj.transform.parent);
             moneyAdd = obj.GetComponent<Unit>().attributes.cost;
             Destroy(obj);
         }

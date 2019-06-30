@@ -11,6 +11,13 @@ public class UnitLimitManager : MonoBehaviour
     public int CurrentUnits = 0;
     public Text UnitLimitText = null;
 
+    public Button nextWaveButton = null;
+
+    List<GameObject> playerUnitsList = new List<GameObject>();
+    List<Transform> playerUnitsTileList = new List<Transform>();
+    int numberOfPlayerUnits;
+    int numberOfEnemies;
+
     private void Awake()
     {
         if (instance == null)
@@ -24,20 +31,30 @@ public class UnitLimitManager : MonoBehaviour
         }
     }
     
-    public void AddUnit(){
+    public void AddUnit(GameObject unit, Transform tile){
         if(IsLessThanLimit()){
+            if(CurrentUnits==0) nextWaveButton.interactable = true;
             CurrentUnits ++;
+            numberOfPlayerUnits = CurrentUnits;
             UnitLimitText.text = CurrentUnits.ToString() + " / " + Limit.ToString();
+            playerUnitsList.Add(unit);
+            playerUnitsTileList.Add(tile);
+            print("number of players " + numberOfPlayerUnits);
         }
         else{
             //full
         }
     }
 
-    public void RemoveUnit(){
+    public void RemoveUnit(GameObject unit, Transform tile){
         if(CurrentUnits > 0){
+            if(CurrentUnits == 1) nextWaveButton.interactable = false;
             CurrentUnits --;
+            numberOfPlayerUnits = CurrentUnits;
             UnitLimitText.text = CurrentUnits.ToString() + " / " + Limit.ToString();
+            playerUnitsList.Remove(unit);
+            playerUnitsTileList.Remove(tile);
+            print("number of players " + numberOfPlayerUnits);
         }
         else{
             //empty
@@ -49,5 +66,37 @@ public class UnitLimitManager : MonoBehaviour
             return true;
         }
         else return false;
+    }
+
+    public void PlayerUnitDeath(){
+        print("player death");
+        numberOfPlayerUnits--;
+        if(numberOfPlayerUnits <= 0){
+            EndManager.instance.TriggerDefeat();
+        }
+    }
+
+    public void EnemyUnitDeath(){
+        print("enemy death");
+        numberOfEnemies--;
+        if(numberOfEnemies <= 0){
+            ResetPlayerUnits();
+            GUIManager.instance.ShowPanel();
+        }
+    }
+
+    public void ResetPlayerUnits(){
+        GameObject newObj;
+        GameObject[] prefabList = UnitListManager.instance.unitsList;
+        for(int i = 0; i < playerUnitsList.Count; i++){
+            newObj = Instantiate(prefabList[playerUnitsList[i].GetComponent<UnitIndexes>().unitIndex], playerUnitsTileList[i]);
+            Destroy(playerUnitsList[i]);
+            playerUnitsList[i] = newObj;
+        }
+    }
+
+    public void SetNumberOfEnemies(int enemies){
+        numberOfEnemies = enemies;
+        print("number of enemies " + numberOfEnemies);
     }
 }

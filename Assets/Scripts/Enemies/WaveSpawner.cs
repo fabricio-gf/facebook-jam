@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
+    public static WaveSpawner instance = null;
     public int initialEnemyNumber = 2;
     public int currentWave = 0;
 
@@ -12,9 +13,16 @@ public class WaveSpawner : MonoBehaviour
     public Transform[] tiles;
     List<Transform> freeTiles = new List<Transform>();
 
-    void Start(){
-        SpawnWave();
-        
+    void Awake(){
+        if (instance == null)
+        {
+            instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+        else if (instance != this)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void SpawnWave(){
@@ -22,17 +30,20 @@ public class WaveSpawner : MonoBehaviour
         freeTiles.AddRange(tiles);
         int randomIndex = 0;
         GameObject obj = null;
-        for(int i = 0; i < initialEnemyNumber + Mathf.FloorToInt(Mathf.Pow(currentWave, (1f/3f))); i++){
+        int numberOfEnemies = initialEnemyNumber + Mathf.FloorToInt(Mathf.Pow(currentWave, (1f/3f)));
+        for(int i = 0; i < numberOfEnemies; i++){
             randomIndex = Random.Range(0, freeTiles.Count);
             obj = Instantiate(enemies[Random.Range(0, enemies.Length)], freeTiles[randomIndex]);
             freeTiles.RemoveAt(randomIndex);
         }
-
+        UnitLimitManager.instance.SetNumberOfEnemies(numberOfEnemies);
     }
 
     public void StartWave(){
-        CountDown.instance.StartRoundCountdown();
-        //start unit behaviours
+        Unidade[] units = FindObjectsOfType<Unidade>();
+        for(int i = 0; i < units.Length; i++){
+            units[i].StartFight();
+        }
         currentWave++;
     }
 }

@@ -26,8 +26,8 @@ public class PlaceUnit : MonoBehaviour
                 int index = unit.GetComponent<UnitIndexes>().unitIndex;
                 newObj = Instantiate(UnitListManager.instance.iconsList[index], transform);
                 BenchManager.instance.AddUnitToBench(newObj.transform, transform.GetSiblingIndex());
+                UnitLimitManager.instance.RemoveUnit(obj, obj.transform);
                 Destroy(obj);
-                UnitLimitManager.instance.RemoveUnit();
                 SelectedUnit.instance.DeselectUnit();
             }
         }
@@ -42,8 +42,8 @@ public class PlaceUnit : MonoBehaviour
                     int index = unit.GetComponent<UnitIndexes>().unitIndex;
                     newObj = Instantiate(UnitListManager.instance.unitsList[index], transform);
                     newObj.transform.GetChild(1).GetComponent<AddBehaviourToIconButton>().AddSelectBehaviour();
+                    UnitLimitManager.instance.AddUnit(newObj, transform);
                     Destroy(unit.gameObject);
-                    UnitLimitManager.instance.AddUnit();
                     SelectedUnit.instance.DeselectUnit();
                 }
             }
