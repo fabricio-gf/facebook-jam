@@ -82,6 +82,7 @@ public class UnitLimitManager : MonoBehaviour
         if(numberOfEnemies <= 0){
             ResetPlayerUnits();
             GUIManager.instance.ShowPanel();
+            nextWaveButton.enabled = true;
         }
     }
 

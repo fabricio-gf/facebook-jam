@@ -18,6 +18,8 @@ public class CountDown : MonoBehaviour
     public string[] countdownStrings = null;
     Queue<string> countdownQueue = new Queue<string>();
 
+    public Button nextWaveButton = null;
+
     void Awake(){
         if (instance == null)
         {
@@ -36,9 +38,11 @@ public class CountDown : MonoBehaviour
         //StartRoundCountdown();
     }
     public void StartRoundCountdown(){
+        nextWaveButton.enabled= false;
         countdownQueue.Clear();
         for(int i = 0; i < countdownStrings.Length; i++){
             countdownQueue.Enqueue(countdownStrings[i]);
+            print("entrou");
         }
         StartCoroutine(Step());
     }
