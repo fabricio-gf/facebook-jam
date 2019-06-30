@@ -39,7 +39,7 @@ public class HealAlly : StateMachineBehaviour
         Unidade[] unidades = FindObjectsOfType<Unidade>();
         Vector3 myPosition = myTransform.position;
         foreach (Unidade u in unidades) {
-            if (u.CompareTag(myTransform.tag)) {
+            if (u != myUnidade && u.CompareTag(myTransform.tag)) {
                 if (myUnidade.Target == null) {
                     myUnidade.Target = u;
                 } else {

@@ -32,7 +32,7 @@ public class GridManager : MonoBehaviour {
         if (row >= 0 && row < rows && colum >= 0 && colum < columns) {
             return row * columns + colum;
         }
-        Debug.LogError("ERRO!, tentando andar para posição row = " + row + " colum = " + colum + " Matriz: " + columns + "x" + rows);
+        //Debug.LogError("ERRO!, tentando andar para posição row = " + row + " colum = " + colum + " Matriz: " + columns + "x" + rows);
         return -1;
     }
 
@@ -51,7 +51,7 @@ public class GridManager : MonoBehaviour {
     }
 
     public int ManhattanDistance(Transform originTransform, Transform destinationTransform) {
-        //Debug.Log(originTransform.name+ Vet2Grid(originTransform.GetSiblingIndex()) + " x " + Vet2Grid(destinationTransform.GetSiblingIndex()) );
+       // Debug.Log(originTransform.name +" distancia " + ManhattanDistance(Vet2Grid(originTransform.GetSiblingIndex()), Vet2Grid(destinationTransform.GetSiblingIndex())) +"de " + destinationTransform.name);
         return ManhattanDistance(Vet2Grid(originTransform.GetSiblingIndex()), Vet2Grid(destinationTransform.GetSiblingIndex()));
     }
 
@@ -62,7 +62,20 @@ public class GridManager : MonoBehaviour {
 
     Transform GetTileByPosition(Vector2Int pos) {
         //Debug.Log("grid : " + pos + " sibling: " + Grid2Vet(pos));
-        return transform.GetChild(Grid2Vet(pos));
+        int childIndex = Grid2Vet(pos);
+        if (childIndex >=0 && childIndex < transform.childCount) {
+            return transform.GetChild(childIndex);
+        }
+        return null;
+    }
+
+    public Transform NextTile(Transform originTile, Vector2Int direction) {
+        Vector2Int posGrid = Vet2Grid(originTile.GetSiblingIndex());
+        Transform tile = GetTileByPosition(posGrid + direction);
+        if (tile != null && tile.childCount == 0) {
+            return tile;
+        }
+        return null;
     }
 
     public Transform NextTile(Transform originTile, Transform destinationTile) { 
@@ -83,23 +96,23 @@ public class GridManager : MonoBehaviour {
         if (Mathf.Abs(diry.y) > Mathf.Abs(dirx.x)) {
             dirInt = new Vector2Int(0, (int)diry.y);
             tile = GetTileByPosition(posGrid + dirInt);
-            if (tile.childCount == 0) {
+            if (tile != null && tile.childCount == 0) {
                 return tile;
             }
             dirInt = new Vector2Int((int)dirx.x, 0);
             tile = GetTileByPosition(posGrid + dirInt);
-            if (tile.childCount == 0) {
+            if (tile != null && tile.childCount == 0) {
                 return tile;
             }
         } else {
             dirInt = new Vector2Int((int)dirx.x, 0);
             tile = GetTileByPosition(posGrid + dirInt);
-            if (tile.childCount == 0) {
+            if (tile != null && tile.childCount == 0) {
                 return tile;
             }
             dirInt = new Vector2Int(0, (int)diry.y);
             tile = GetTileByPosition(posGrid + dirInt);
-            if (tile.childCount == 0) {
+            if (tile != null && tile.childCount == 0) {
                 return tile;
             }
         }   
