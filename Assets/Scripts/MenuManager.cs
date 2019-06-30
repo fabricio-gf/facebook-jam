@@ -11,11 +11,7 @@ public class MenuManager : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void MainToDeck(){
-        animator.SetTrigger("MainToDeck");
-    }
-
-    public void DeckToMain(){
-        animator.SetTrigger("DeckToMain");
+    public void TriggerAnimation(string anim){
+        animator.SetTrigger(anim);
     }
 }
