@@ -13,8 +13,9 @@ public class UnitLimitManager : MonoBehaviour
 
     public Button nextWaveButton = null;
 
-    List<GameObject> playerUnitsList = new List<GameObject>();
-    List<Transform> playerUnitsTileList = new List<Transform>();
+    public List<int> unitsIndexes = new List<int>();
+    public List<GameObject> playerUnitsList = new List<GameObject>();
+    public List<Transform> playerUnitsTileList = new List<Transform>();
     int numberOfPlayerUnits;
     int numberOfEnemies;
 
@@ -36,7 +37,9 @@ public class UnitLimitManager : MonoBehaviour
             if(CurrentUnits==0) nextWaveButton.interactable = true;
             CurrentUnits ++;
             numberOfPlayerUnits = CurrentUnits;
-            UnitLimitText.text = CurrentUnits.ToString() + " / " + Limit.ToString();
+            UnitLimitText.text = CurrentUnits.ToString() + "/" + Limit.ToString();
+
+            unitsIndexes.Add(unit.GetComponent<UnitIndexes>().unitIndex);
             playerUnitsList.Add(unit);
             playerUnitsTileList.Add(tile);
             print("number of players " + numberOfPlayerUnits);
@@ -51,7 +54,9 @@ public class UnitLimitManager : MonoBehaviour
             if(CurrentUnits == 1) nextWaveButton.interactable = false;
             CurrentUnits --;
             numberOfPlayerUnits = CurrentUnits;
-            UnitLimitText.text = CurrentUnits.ToString() + " / " + Limit.ToString();
+            UnitLimitText.text = CurrentUnits.ToString() + "/" + Limit.ToString();
+
+            unitsIndexes.Remove(unit.GetComponent<UnitIndexes>().unitIndex);
             playerUnitsList.Remove(unit);
             playerUnitsTileList.Remove(tile);
             print("number of players " + numberOfPlayerUnits);
@@ -81,6 +86,7 @@ public class UnitLimitManager : MonoBehaviour
         numberOfEnemies--;
         if(numberOfEnemies <= 0){
             ResetPlayerUnits();
+            WaveSpawner.instance.SpawnWave();
             GUIManager.instance.ShowPanel();
             nextWaveButton.enabled = true;
         }
@@ -90,7 +96,7 @@ public class UnitLimitManager : MonoBehaviour
         GameObject newObj;
         GameObject[] prefabList = UnitListManager.instance.unitsList;
         for(int i = 0; i < playerUnitsList.Count; i++){
-            newObj = Instantiate(prefabList[playerUnitsList[i].GetComponent<UnitIndexes>().unitIndex], playerUnitsTileList[i]);
+            newObj = Instantiate(prefabList[unitsIndexes[i]], playerUnitsTileList[i]);
             Destroy(playerUnitsList[i]);
             playerUnitsList[i] = newObj;
         }

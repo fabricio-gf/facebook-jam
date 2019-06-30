@@ -38,11 +38,12 @@ public class CountDown : MonoBehaviour
         //StartRoundCountdown();
     }
     public void StartRoundCountdown(){
+        countdown.SetActive(true);
+        currentStep = 0;
         nextWaveButton.enabled= false;
         countdownQueue.Clear();
         for(int i = 0; i < countdownStrings.Length; i++){
             countdownQueue.Enqueue(countdownStrings[i]);
-            print("entrou");
         }
         StartCoroutine(Step());
     }
