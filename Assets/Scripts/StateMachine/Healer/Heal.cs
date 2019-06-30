@@ -21,10 +21,23 @@ public class Heal : StateMachineBehaviour{
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         animator.speed = 1;
-        //Aplicar dano
-        if (myUnidade.Target != null) {
-            myUnidade.Target.ApplyDamage(myUnidade.Damage);
+        Transform nextTile = myUnidade.grid.NextTile(myUnidade.transform.parent, Vector2Int.up);
+        if (nextTile != null && nextTile.childCount > 0) {
+            nextTile.GetComponentInChildren<Unidade>().ApplyHeal(myUnidade.Damage);
         }
-        animator.SetBool("Atacando" , false);
+        nextTile = myUnidade.grid.NextTile(myUnidade.transform.parent, Vector2Int.down);
+        if (nextTile != null && nextTile.childCount > 0) {
+            nextTile.GetComponentInChildren<Unidade>().ApplyHeal(myUnidade.Damage);
+        }
+        nextTile = myUnidade.grid.NextTile(myUnidade.transform.parent, Vector2Int.right);
+        if (nextTile != null && nextTile.childCount > 0) {
+            nextTile.GetComponentInChildren<Unidade>().ApplyHeal(myUnidade.Damage);
+        }
+        nextTile = myUnidade.grid.NextTile(myUnidade.transform.parent, Vector2Int.left);
+        if (nextTile != null && nextTile.childCount > 0) {
+            nextTile.GetComponentInChildren<Unidade>().ApplyHeal(myUnidade.Damage);
+        }
+
+        animator.SetBool("Curando" , false);
     }
 }

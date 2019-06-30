@@ -35,7 +35,7 @@ public class Unidade : MonoBehaviour{
 
     public int DistanceToTarget() {
         if (Target != null) {
-            Debug.Log(name + " distancia:" + grid.ManhattanDistance(transform, Target.transform) + " de " + Target.name);
+            Debug.Log(name + " distancia:" + grid.ManhattanDistance(transform.parent, Target.transform.parent) + " de " + Target.name);
             return grid.ManhattanDistance(transform.parent, Target.transform.parent);
         } else {
             return int.MaxValue;
@@ -56,6 +56,9 @@ public class Unidade : MonoBehaviour{
 
     public void ApplyHeal(float amount) {
         Life += Mathf.Abs(amount);
+        if (Life > MaxLife) {
+            Life = MaxLife;
+        }
     }
 
     public void StartFight() {

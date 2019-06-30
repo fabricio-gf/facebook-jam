@@ -15,7 +15,7 @@ public class Healing : StateMachineBehaviour{
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         animator.SetBool("TargetInRange", myUnidade.TargetInRange());
 
-        if (myUnidade.Target != null) {
+        if (myUnidade.Target != null && myUnidade.TargetInRange()) {
             animator.SetBool("Curando", true);
         }
     }
