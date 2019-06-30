@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88c1ff0495666049824f979d3ee602f, type: 3}
   m_Name: Unit3
   m_EditorClassIdentifier: 
-  name: 
+  unitName: 
   level: 0
-  cost: 3
+  cost: 2
   hp: 0
   attackSpeed: 0
+  description: 

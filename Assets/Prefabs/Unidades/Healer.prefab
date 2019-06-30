@@ -50,11 +50,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78310f96265ed0248ac620c20e1aafb3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxLife: 10
-  Life: 10
-  Damage: 1
+  MaxLife: 8
+  Life: 8
+  Damage: 5
   AtaqueDelay: 1
-  Range: 3
+  Range: 4
   MovementSpeed: 2
   Target: {fileID: 0}
   grid: {fileID: 0}
