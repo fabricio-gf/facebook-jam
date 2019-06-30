@@ -267,7 +267,7 @@ MonoBehaviour:
   MaxLife: 10
   Life: 10
   Damage: 1
-  AtaqueDelay: 1
+  AtaqueDelay: 1.2
   Range: 1
   MovementSpeed: 2
   Target: {fileID: 0}

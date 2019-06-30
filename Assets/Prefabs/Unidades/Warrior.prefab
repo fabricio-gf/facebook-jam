@@ -5076,7 +5076,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxLife: 10
   Life: 10
-  Damage: 1
+  Damage: 4
   AtaqueDelay: 1
   Range: 1
   MovementSpeed: 2
