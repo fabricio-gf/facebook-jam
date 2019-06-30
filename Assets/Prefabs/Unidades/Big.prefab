@@ -187,8 +187,8 @@ MonoBehaviour:
   MaxLife: 5
   Life: 10
   Damage: 5
-  AtaqueDelay: 1.2
-  Range: 3
+  AtaqueDelay: 1
+  Range: 4
   MovementSpeed: 2
   Target: {fileID: 0}
   grid: {fileID: 0}
