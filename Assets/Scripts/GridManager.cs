@@ -46,13 +46,11 @@ public class GridManager : MonoBehaviour {
         return new Vector2Int(-1, -1);
     }
 
-    public int ManhattanDistance(Vector2Int origin, Vector2Int destination) {
+    public static int ManhattanDistance(Vector2Int origin, Vector2Int destination) {
         return Mathf.Abs(destination.x - origin.x) + Mathf.Abs(destination.y - origin.y);
     }
 
     public Vector2Int[] AStar(Vector2Int origin, Vector2Int destination) {
-
-
         Debug.Log("to be implemented");
         return null;
     }
@@ -70,10 +68,10 @@ public class GridManager : MonoBehaviour {
         }
         dir.Normalize();
         Vector2Int dirInt = new Vector2Int((int)dir.x, (int)dir.y);
-        Debug.Log("Proxima tile ta pra dir:" + dirInt);
+        //Debug.Log("Proxima tile ta pra dir:" + dirInt);
 
         Vector2Int posGrid = Vet2Grid(originTile.GetSiblingIndex());
-        Debug.Log("tile atual: "+ originTile.name+" na pos " + posGrid + " nova tile: " + GetTileByPosition(posGrid + dirInt).name + " na pos " + posGrid + dirInt);
+        //Debug.Log("tile atual: "+ originTile.name+" na pos " + posGrid + " nova tile: " + GetTileByPosition(posGrid + dirInt).name + " na pos " + posGrid + dirInt);
         return GetTileByPosition(posGrid + dirInt);
     }
 
