@@ -13,10 +13,10 @@ public class Atacando : StateMachineBehaviour{
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+        animator.SetBool("TargetInRange", myUnidade.TargetInRange());
+
         if (myUnidade.Target != null) {
             animator.SetBool("Atacando", true);
-        } else {
-            animator.SetFloat("TargetDistance", float.MaxValue);
         }
     }
 
