@@ -27,7 +27,7 @@ public class UnitLimitManager : MonoBehaviour
     public void AddUnit(){
         if(IsLessThanLimit()){
             CurrentUnits ++;
-            UnitLimitText.text = CurrentUnits.ToString();
+            UnitLimitText.text = CurrentUnits.ToString() + " / " + Limit.ToString();
         }
         else{
             //full
@@ -37,7 +37,7 @@ public class UnitLimitManager : MonoBehaviour
     public void RemoveUnit(){
         if(CurrentUnits > 0){
             CurrentUnits --;
-            UnitLimitText.text = CurrentUnits.ToString();
+            UnitLimitText.text = CurrentUnits.ToString() + " / " + Limit.ToString();
         }
         else{
             //empty

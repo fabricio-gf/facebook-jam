@@ -7,7 +7,7 @@ public class GUIManager : MonoBehaviour
 
     public static GUIManager instance = null;
 
-    Animator animator = null;
+    public Animator animator = null;
     
     void Awake(){
         if(instance == null)
@@ -19,7 +19,7 @@ public class GUIManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        animator = GetComponent<Animator>();
+        //animator = GetComponent<Animator>();
     }
     
     public void HidePanel(){

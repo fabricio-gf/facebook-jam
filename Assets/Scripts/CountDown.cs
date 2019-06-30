@@ -33,7 +33,7 @@ public class CountDown : MonoBehaviour
         countdownAnimator = countdown.GetComponent<Animator>();
 
         //test
-        StartRoundCountdown();
+        //StartRoundCountdown();
     }
     public void StartRoundCountdown(){
         countdownQueue.Clear();

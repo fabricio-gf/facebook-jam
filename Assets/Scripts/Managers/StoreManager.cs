@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class StoreManager : MonoBehaviour
 {
+    public int[] cardsInDeck;
+    List<GameObject> localDeck = new List<GameObject>();
     public static StoreManager instance = null;
 
     public int UnitsInStore = 3;
@@ -23,6 +25,7 @@ public class StoreManager : MonoBehaviour
     }
 
     void Start(){
+        cardsInDeck = Deck.instance.cards;
         ShowNewUnitsInStore();
     }
 
@@ -36,12 +39,19 @@ public class StoreManager : MonoBehaviour
     }
 
     public void ShowNewUnitsInStore(){
+        localDeck.Clear();
+        for(int i = 0; i < cardsInDeck.Length; i++){
+            localDeck.Add(UnitListManager.instance.iconsList[cardsInDeck[i]]);
+        }
         EmptyStore();
 
         GameObject obj = null;
+        int randomIndex = 0;
         for(int i = 0; i < transform.childCount; i++){
             Transform t = transform.GetChild(i);
-            obj = Instantiate(UnitListManager.instance.iconsList[Random.Range(0, UnitListManager.instance.iconsList.Length)], t);
+            randomIndex = Random.Range(0, localDeck.Count);
+            obj = Instantiate(localDeck[randomIndex], t);
+            localDeck.RemoveAt(randomIndex);
             obj.GetComponent<UnitIndexes>().storeIndex = i;
             obj.GetComponent<AddBehaviourToIconButton>().AddBuyBehaviour();
         }
