@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class AddBehaviourToIconButton : MonoBehaviour
 {
+    public bool SelectParent;
     UnitIndexes icon = null;
     Button thisButton = null;
     void Awake(){
@@ -22,6 +23,12 @@ public class AddBehaviourToIconButton : MonoBehaviour
 
     public void AddSelectBehaviour(){
         RemoveBehaviours();
-        thisButton.onClick.AddListener(() => SelectedUnit.instance.SelectUnit(gameObject));
+        if(SelectParent){
+            thisButton.onClick.AddListener(() => SelectedUnit.instance.SelectUnit(transform.parent.gameObject));
+        }
+        else{
+            print("select behaviour");
+            thisButton.onClick.AddListener(() => SelectedUnit.instance.SelectUnit(gameObject));
+        }
     }
 }
