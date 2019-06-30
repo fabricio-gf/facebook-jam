@@ -19,6 +19,8 @@ public class Unidade : MonoBehaviour{
 
     Animator _Animator;
 
+    bool isAlive = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,10 +52,14 @@ public class Unidade : MonoBehaviour{
 
         Life -= Mathf.Abs(damage);
         if (Life <= 0) {
-            if(tag == "Player") UnitLimitManager.instance.PlayerUnitDeath();
-            if(tag == "Enemy") {
+            if(tag == "Player" && isAlive){ 
+                UnitLimitManager.instance.PlayerUnitDeath();
+                isAlive = false;
+            }
+            if(tag == "Enemy" && isAlive) {
                 MoneyManager.instance.UpdateMoney(2);
                 UnitLimitManager.instance.EnemyUnitDeath();
+                isAlive = false;
             }
 
             Destroy(gameObject);
